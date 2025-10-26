@@ -1,12 +1,19 @@
 import { useState } from "react";
 import Button from "./Button";
 export default function Personal() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
-    const name = e.target.value;
-    const value = e.target.value;
-    setFormData((values) => ({ ...values, [name]: value }));
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   function handleNext(e) {
@@ -20,7 +27,7 @@ export default function Personal() {
         <label>
           Full Name *
           <input
-            name="nameInput"
+            name="fullName"
             type="text"
             placeholder="John Smith"
             value={formData.fullName}
@@ -32,7 +39,7 @@ export default function Personal() {
           <input
             type="email"
             placeholder="johnsmith@example.com"
-            name="emailInput"
+            name="email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -42,7 +49,7 @@ export default function Personal() {
           <input
             type="password"
             placeholder="Enter Password"
-            name="passwordInput"
+            name="password"
             value={formData.password}
             onChange={handleChange}
           />
