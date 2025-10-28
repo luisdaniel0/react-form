@@ -3,31 +3,8 @@ export default function Personal({
   formData,
   handleChange,
   errors,
-  setErrors,
+  handleNext,
 }) {
-  function handleNext(e) {
-    e.preventDefault(e);
-
-    const newErrors = {};
-
-    if (formData.fullName === "") {
-      newErrors.fullName = "Please enter a name";
-    }
-    if (formData.email === "") {
-      newErrors.email = "Please enter a valid email address";
-    }
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be longer than 6 characters";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    console.log("all validations passed! move to next step");
-  }
-
   return (
     <div className="container">
       <h1>Personal Information</h1>
