@@ -5,11 +5,12 @@ export default function Address({
   errors,
   handleChange,
   handlePrev,
+  showPrevious,
 }) {
   return (
     <div className="container">
-      <h1>Address Information</h1>
-      <form>
+      <h1 className="formHeader">Address Information</h1>
+      <form className="form">
         <label>
           Street Address
           <input
@@ -55,7 +56,11 @@ export default function Address({
             </span>
           )}
         </label>
-        <Button onClick={handleNext} handlePrev={handlePrev} />
+        <Button
+          onClick={handleNext}
+          handlePrev={handlePrev}
+          showPrevious={showPrevious}
+        />
       </form>
     </div>
   );

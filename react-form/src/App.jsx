@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Personal from "./Components/Personal";
 import Address from "./Components/Address";
-// import Button from "./Components/Button";
+import Review from "./Components/Review";
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -22,6 +22,11 @@ function App() {
     city: "",
     zipCode: "",
   });
+
+  // function resetState() {
+  //   const newErrors = {};
+  //   setErrors(newErrors);
+  // }
   function handleNext(e) {
     e.preventDefault(e);
 
@@ -41,10 +46,30 @@ function App() {
         setErrors(newErrors);
         return;
       }
+      setErrors({});
+      console.log("all validations passed! move to next step");
+      setCurrentStep(2);
     }
+    if (currentStep === 2) {
+      if (formData.address === "") {
+        newErrors.address = "Please enter a street address";
+      }
+      if (formData.city === "") {
+        newErrors.city = "Please enter a city";
+      }
+      if (formData.zipCode === "") {
+        newErrors.zipCode = "Please enter a zip code";
+      }
 
-    console.log("all validations passed! move to next step");
-    setCurrentStep(2);
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+      console.log("step 2 passed!");
+      setErrors({});
+      setCurrentStep(3);
+      console.log(currentStep);
+    }
   }
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,16 +80,49 @@ function App() {
     }));
   };
 
+  const handlePrev = (e) => {
+    e.preventDefault();
+    console.log("clicking prev");
+    console.log(e);
+    if (currentStep === 2) {
+      setCurrentStep(1);
+    }
+    if (currentStep === 3) {
+      setCurrentStep(2);
+    }
+  };
+
   return (
     <>
-      <Personal
-        handleChange={handleChange}
-        formData={formData}
-        errors={errors}
-        setErrors={setErrors}
-        handleNext={handleNext}
-      />
-      {currentStep === 2 ? <Address /> : null}
+      {currentStep === 1 && (
+        <Personal
+          handleChange={handleChange}
+          formData={formData}
+          errors={errors}
+          setErrors={setErrors}
+          handleNext={handleNext}
+          showPrevious={false}
+        />
+      )}
+
+      {currentStep === 2 && (
+        <Address
+          handleNext={handleNext}
+          formData={formData}
+          errors={errors}
+          setErrors={setErrors}
+          handleChange={handleChange}
+          handlePrev={handlePrev}
+          showPrevious={true}
+        />
+      )}
+      {currentStep === 3 && (
+        <Review
+          formData={formData}
+          handlePrev={handlePrev}
+          showPrevious={true}
+        />
+      )}
     </>
   );
 }

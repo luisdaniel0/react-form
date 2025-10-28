@@ -4,11 +4,12 @@ export default function Personal({
   handleChange,
   errors,
   handleNext,
+  showPrevious,
 }) {
   return (
     <div className="container">
-      <h1>Personal Information</h1>
-      <form>
+      <h1 className="formHeader">Personal Information</h1>
+      <form className="form">
         <label>
           Full Name *
           <input
@@ -54,7 +55,7 @@ export default function Personal({
             </span>
           )}
         </label>
-        <Button onClick={handleNext} />
+        <Button onClick={handleNext} showPrevious={showPrevious} />
       </form>
     </div>
   );
