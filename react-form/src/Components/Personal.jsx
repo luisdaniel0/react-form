@@ -1,23 +1,31 @@
-import { useState } from "react";
 import Button from "./Button";
-export default function Personal() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
+export default function Personal({
+  formData,
+  handleChange,
+  errors,
+  setErrors,
+}) {
   function handleNext(e) {
     e.preventDefault(e);
+
+    const newErrors = {};
+
+    if (formData.fullName === "") {
+      newErrors.fullName = "Please enter a name";
+    }
+    if (formData.email === "") {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (formData.password.length < 6) {
+      newErrors.password = "Password must be longer than 6 characters";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    console.log("all validations passed! move to next step");
   }
 
   return (
@@ -33,6 +41,11 @@ export default function Personal() {
             value={formData.fullName}
             onChange={handleChange}
           />
+          {errors.fullName && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.fullName}
+            </span>
+          )}
         </label>
         <label>
           E-mail *
@@ -43,6 +56,11 @@ export default function Personal() {
             value={formData.email}
             onChange={handleChange}
           />
+          {errors.email && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.email}
+            </span>
+          )}
         </label>
         <label>
           Password*
@@ -53,6 +71,11 @@ export default function Personal() {
             value={formData.password}
             onChange={handleChange}
           />
+          {errors.password && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.password}
+            </span>
+          )}
         </label>
         <Button onClick={handleNext} />
       </form>
