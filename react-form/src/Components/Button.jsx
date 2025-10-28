@@ -1,10 +1,12 @@
-export default function Button({ onClick }) {
+export default function Button({ onClick, handlePrev }) {
   return (
-    <>
-      <button className="prevButton">Previous</button>
+    <div className="buttonContainer">
+      <button className="prevButton" onClick={handlePrev}>
+        Previous
+      </button>
       <button onClick={onClick} className="nextButton">
         Next
       </button>
-    </>
+    </div>
   );
 }
