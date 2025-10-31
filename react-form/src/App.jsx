@@ -2,6 +2,7 @@ import { useState } from "react";
 import Personal from "./Components/Personal";
 import Address from "./Components/Address";
 import Review from "./Components/Review";
+import "./App.css";
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
