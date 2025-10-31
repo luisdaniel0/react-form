@@ -85,35 +85,37 @@ function App() {
 
   return (
     <>
-      <ProgressBar currentStep={currentStep} />
-      {currentStep === 1 && (
-        <Personal
-          handleChange={handleChange}
-          formData={formData}
-          errors={errors}
-          handleNext={handleNext}
-          showPrevious={false}
-        />
-      )}
-
-      {currentStep === 2 && (
-        <Address
-          handleNext={handleNext}
-          formData={formData}
-          errors={errors}
-          handleChange={handleChange}
-          handlePrev={handlePrev}
-          showPrevious={true}
-        />
-      )}
-
-      {currentStep === 3 && (
-        <Review
-          formData={formData}
-          handlePrev={handlePrev}
-          showPrevious={true}
-        />
-      )}
+      <div className="container">
+        {/* <ProgressBar currentStep={currentStep} /> */}
+        {currentStep === 1 && (
+          <Personal
+            handleChange={handleChange}
+            formData={formData}
+            errors={errors}
+            handleNext={handleNext}
+            showPrevious={false}
+            currentStep={currentStep}
+          />
+        )}
+        {currentStep === 2 && (
+          <Address
+            handleNext={handleNext}
+            formData={formData}
+            errors={errors}
+            handleChange={handleChange}
+            handlePrev={handlePrev}
+            showPrevious={true}
+          />
+        )}
+        {currentStep === 3 && (
+          <Review
+            formData={formData}
+            handlePrev={handlePrev}
+            showPrevious={true}
+          />
+        )}
+        /
+      </div>
     </>
   );
 }
