@@ -2,6 +2,7 @@ import { useState } from "react";
 import Personal from "./Components/Personal";
 import Address from "./Components/Address";
 import Review from "./Components/Review";
+import ProgressBar from "./Components/ProgressBar";
 import "./App.css";
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
 
   return (
     <>
+      <ProgressBar currentStep={currentStep} />
       {currentStep === 1 && (
         <Personal
           handleChange={handleChange}
