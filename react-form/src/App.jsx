@@ -5,7 +5,6 @@ import Review from "./Components/Review";
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
-
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -14,28 +13,18 @@ function App() {
     city: "",
     zipCode: "",
   });
-  const [errors, setErrors] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    address: "",
-    city: "",
-    zipCode: "",
-  });
+  const [errors, setErrors] = useState({});
 
-  // function resetState() {
-  //   const newErrors = {};
-  //   setErrors(newErrors);
-  // }
   function handleNext(e) {
-    e.preventDefault(e);
+    e.preventDefault();
 
     const newErrors = {};
+
     if (currentStep === 1) {
-      if (formData.fullName === "") {
+      if (!formData.fullName.trim()) {
         newErrors.fullName = "Please enter a name";
       }
-      if (formData.email === "") {
+      if (!formData.email.trim()) {
         newErrors.email = "Please enter a valid email address";
       }
       if (formData.password.length < 6) {
@@ -46,18 +35,17 @@ function App() {
         setErrors(newErrors);
         return;
       }
+
       setErrors({});
-      console.log("all validations passed! move to next step");
       setCurrentStep(2);
-    }
-    if (currentStep === 2) {
-      if (formData.address === "") {
+    } else if (currentStep === 2) {
+      if (!formData.address.trim()) {
         newErrors.address = "Please enter a street address";
       }
-      if (formData.city === "") {
+      if (!formData.city.trim()) {
         newErrors.city = "Please enter a city";
       }
-      if (formData.zipCode === "") {
+      if (!formData.zipCode.trim()) {
         newErrors.zipCode = "Please enter a zip code";
       }
 
@@ -65,12 +53,12 @@ function App() {
         setErrors(newErrors);
         return;
       }
-      console.log("step 2 passed!");
+
       setErrors({});
       setCurrentStep(3);
-      console.log(currentStep);
     }
   }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -78,18 +66,19 @@ function App() {
       ...prevData,
       [name]: value,
     }));
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+      }));
+    }
   };
 
   const handlePrev = (e) => {
     e.preventDefault();
-    console.log("clicking prev");
-    console.log(e);
-    if (currentStep === 2) {
-      setCurrentStep(1);
-    }
-    if (currentStep === 3) {
-      setCurrentStep(2);
-    }
+    setCurrentStep((prev) => Math.max(1, prev - 1));
   };
 
   return (
@@ -99,7 +88,6 @@ function App() {
           handleChange={handleChange}
           formData={formData}
           errors={errors}
-          setErrors={setErrors}
           handleNext={handleNext}
           showPrevious={false}
         />
@@ -110,12 +98,12 @@ function App() {
           handleNext={handleNext}
           formData={formData}
           errors={errors}
-          setErrors={setErrors}
           handleChange={handleChange}
           handlePrev={handlePrev}
           showPrevious={true}
         />
       )}
+
       {currentStep === 3 && (
         <Review
           formData={formData}
