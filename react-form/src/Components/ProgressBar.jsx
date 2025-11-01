@@ -1,3 +1,4 @@
+import React from "react";
 const ProgressBar = ({ currentStep }) => {
   const steps = [1, 2, 3];
 
@@ -5,17 +6,21 @@ const ProgressBar = ({ currentStep }) => {
     <div className="steps">
       {steps.map((step) => {
         return (
-          <>
+          <React.Fragment key={step}>
             <div
-              key={step}
               className={`step ${currentStep > step ? "completed" : ""} ${
                 currentStep === step ? "active" : ""
               } ${currentStep < step ? "incomplete" : ""}`}
             >
               {step}
             </div>
-            {step < steps.length && <div className="connector"></div>}
-          </>
+            {step < steps.length && (
+              <div
+                key={`connector-${step}`} // Add this!
+                className={`connector ${currentStep > step ? "completed" : ""}`}
+              ></div>
+            )}
+          </React.Fragment>
         );
       })}
     </div>

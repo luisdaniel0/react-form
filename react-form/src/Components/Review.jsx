@@ -1,8 +1,15 @@
 import Button from "./Button";
-export default function Review({ formData, handlePrev, showPrevious }) {
+import ProgressBar from "./ProgressBar";
+export default function Review({
+  formData,
+  handlePrev,
+  showPrevious,
+  currentStep,
+}) {
   return (
     <>
-      <div className="container">
+      <div className="formContainer">
+        <ProgressBar currentStep={currentStep} />
         <h1 className="formHeader">Review Your Information</h1>
         <div className="reviewDetails">
           <div className="reviewName">{`Name: ${formData.fullName}`}</div>

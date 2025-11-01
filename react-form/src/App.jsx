@@ -105,6 +105,7 @@ function App() {
             handleChange={handleChange}
             handlePrev={handlePrev}
             showPrevious={true}
+            currentStep={currentStep}
           />
         )}
         {currentStep === 3 && (
@@ -112,9 +113,9 @@ function App() {
             formData={formData}
             handlePrev={handlePrev}
             showPrevious={true}
+            currentStep={currentStep}
           />
         )}
-        /
       </div>
     </>
   );
