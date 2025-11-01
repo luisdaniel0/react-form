@@ -94,14 +94,23 @@ span {
   left: 10%;
   display: flex;
   gap: 5rem;
+  transition: background-color 0.5s;
 }
 
-.prevButton {
-  width: 12rem;
-  height: 2.5rem;
-}
-
+.prevButton,
 .nextButton {
   width: 12rem;
-  height: 2.5rem;
+  height: 2.7rem;
+  background: #667eea;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background-color: #3e53b3;
 }
