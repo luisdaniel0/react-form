@@ -10,6 +10,7 @@
 }
 
 .formContainer {
+  position: relative;
   border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
   background-color: white;
@@ -22,7 +23,7 @@
 label {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .steps {
@@ -30,7 +31,7 @@ label {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
 }
 
 .step {
@@ -46,29 +47,33 @@ label {
 }
 
 .formHeader {
-  padding: 20px;
+  font-size: 1.4rem;
+  padding-left: 30px;
 }
 
 .form {
-  padding: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .step.completed {
   background-color: rgb(6, 172, 6);
 }
 
-.step.active {
-  background-color: #667eea;
-}
-
 .connector {
   width: 190px;
   height: 2px;
-  background: #667eea;
+  background: #dcdcdc;
 }
 
 .connector.completed {
-  background-color: #4caf50;
+  background-color: #667eea;
+}
+
+.steps .active {
+  background-color: #667eea;
 }
 
 input {
@@ -77,8 +82,26 @@ input {
   border-radius: 6px;
   font-size: 1rem;
   padding: 12px;
-  margin-bottom: 1.4rem;
 }
 
-label {
+span {
+  font-size: 0.7rem;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  display: flex;
+  gap: 5rem;
+}
+
+.prevButton {
+  width: 12rem;
+  height: 2.5rem;
+}
+
+.nextButton {
+  width: 12rem;
+  height: 2.5rem;
 }
